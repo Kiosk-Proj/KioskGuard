@@ -12,13 +12,16 @@
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools">
             <h2 flex md-truncate>GuardView</h2>
+            <md-checkbox ng-change="calculateActiveKiosks()" ng-model="sallyActive">Sally</md-checkbox>&nbsp;&nbsp;
+            <md-checkbox ng-change="calculateActiveKiosks()" ng-model="joeActive">Joe</md-checkbox>&nbsp;&nbsp;
+            <md-checkbox ng-change="calculateActiveKiosks()" ng-model="bobActive">Bob</md-checkbox>
         </div>
     </md-toolbar>
     <md-content layout="row" flex style="overflow: hidden;">
         <md-content class="full-height" ng-repeat="station in activeKiosks" ng-controller="StudentFeedController as feedctrl" flex style="overflow: hidden; margin-right: -16px;">
             <div class="full-height" flex layout-align="start center" layout="column" style="overflow-y: scroll;">
                 {{feedctrl.station = station;""}}
-                <div class="feed-item" ng-repeat="m in activeKiosks" ng-class="{'feed-item-wide': isWide()}" layout="{{isWide() ? 'row' : 'column'}}" md-whiteframe="1">
+                <div class="feed-item" ng-repeat="m in activeKiosks" ng-class="{'feed-item-wide': isWide()}" layout="{{isWide() || (!isWide() && $index != 0) ? 'row' : 'column'}}" md-whiteframe="1">
                     <img src="data:image/png;base64,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"/>
                     <div class="student-info" flex layout="column">
                         <div flex layout-padding>

@@ -18,16 +18,30 @@
     /*padding: -8px -8px;*/
     padding: 0;
 }
+.feed-item:not(:first-child) {
+    height: 10vh;
+}
+.feed-item:not(:first-child) img {
+    width: auto;
+    height: 100%;
+    float: left;
+}
 
 .feed-item-wide {
     height: 33vh;
 }
 .feed-item-wide img {
-    height: 100%;
     width: 33vh;
     float: left;
+    height: 100%;
 }
-.feed-item-wide .student-info {
+.feed-item-wide:not(:first-child) {
+    height: 10vh;
+}
+.feed-item-wide:not(:first-child) img {
+    width: 10vh;
+}
+.feed-item .student-info {
     height: 100%;
     width: auto;
 }
