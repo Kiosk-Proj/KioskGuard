@@ -1,20 +1,28 @@
-app.service('Server', ['$http', function($http) {
-    function url(endpoint) {
-        if (endpoint[0] == '/') endpoint = endpoint.substring(1);
-        return 'https://javi.is.a.god/' + endpoint;
+app.service('Server', ['$rootScope', '$http', '$timeout', function($rootScope, $http, $timeout) {
+
+    var self = this;
+    this._ws = null;
+
+    function url(endpoint, protocol) {
+        if (endpoint[0] === '/') endpoint = endpoint.substring(1);
+        return protocol + '://javi.is.a.god/' + endpoint;
+    }
+
+    function httpurl(endpoint) {
+        return url(endpoint, 'http');
     }
 
     this.listStudents = function() {
-        return $http(url('/students'));
+        return $http(httpurl('/students'));
     };
     this.getStudent = function(id) {
-        return $http(url('/students?id=' + id));
+        return $http(httpurl('/students?id=' + id));
     };
     this.getStudentsOut = function() {
-        return $http(url('/students/out'));
+        return $http(httpurl('/students/out'));
     };
     this.isStudentOut = function(id) {
-        return $http(url('/students/out?id=' + id));
+        return $http(httpurl('/students/out?id=' + id));
     };
     this.getTransactions = function(opt) {
         var props = ['start', 'end', 'kiosk', 'student'];
@@ -26,12 +34,49 @@ app.service('Server', ['$http', function($http) {
         var query = data.map(function(i) {
             return i.join('=');
         }).join('&');
-        return $http(url('/transactions' + (query.length !== 0 ? '?' : '') + query));
+        return $http(httpurl('/transactions' + (query.length !== 0 ? '?' : '') + query));
     };
     this.getAvatarURL = function(id) {
         if (id !== undefined) {
-            return url('/img');
+            return httpurl('/img');
         }
-        return url('/img?id=' + id);
+        return httpurl('/img?id=' + id);
+    };
+
+    this.connectSocket = function() {
+        self._ws = new WebSocket(url('/live', 'ws'));
+
+        return new Promise(function(resolve, reject) {
+            var timeout = $timeout(function() {
+                self._ws.close();
+                self._ws = null;
+                reject();
+            }, 5000, false);
+            var response = function() {
+                timeout.cancel();
+                self._ws.removeEventListener('open', response);
+                self._ws.addEventListener('message', self._messageHandler);
+                resolve();
+            };
+            self._ws.addEventListener('open', response);
+        });
+    };
+
+    this.closeSocket = function() {
+        self._ws.removeEventListener('message', self._messageHandler);
+        return new Promise(function(resolve, reject) {
+            var response = function() {
+                self._ws.removeEventListener('close', response);
+                self._ws = null;
+                resolve();
+            };
+            self._ws.addEventListener('close', response);
+            self._ws.close();
+
+        });
+    };
+
+    this._messageHandler = function(event) {
+        $rootScope.$broadcast('live:message', event.data);
     }
 }]);
