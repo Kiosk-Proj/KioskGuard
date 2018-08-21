@@ -4,10 +4,11 @@
   "author": "The Millburn High School Computer Science Club",
   "dependencies": {
     "angular": "^1.7.3",
+    "angular-animate": "^1.7.3",
     "angular-aria": "^1.7.3",
     "angular-material": "^1.1.10",
-    "angular-animate": "^1.7.3",
-    "angular-messages": "^1.7.3"
+    "angular-material-time-picker": "^1.0.8",
+    "angular-messages": "1.6.0"
   },
   "devDependencies": {
     "http-server": "^0.11.1"

@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="KioskGuard">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>KioskGuard | Guard View</title>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+            <link href="node_modules/angular-material/angular-material.min.css" rel="stylesheet" />
+            <link href="node_modules/angular-material-time-picker/dist/md-time-picker.css" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+            <link href="css/index.css" rel="stylesheet" />
+        </head>
 <body>
-$END$
+<md-content ng-controller="TransactionViewController" flex layout="column" class="full-height">
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <h2 flex md-truncate>TransactionView</h2>
+        </div>
+    </md-toolbar>
+    <md-content layout="column" flex style="overflow: hidden;">
+        <md-content class="full-height" ng-controller="TransactionFeedController as feedctrl" style="display: block; overflow: hidden; text-align: center; margin-right: -16px;">
+            <div class="full-height" flex layout-align="start center" layout="column" style="overflow-y: scroll; text-align: left;">
+                <div class="transaction-item" ng-repeat="m in transactions" layout="row" md-whiteframe="1" style="height:96px">
+                    <img style="height:100%" src="https://scontent.fewr1-1.fna.fbcdn.net/v/t1.0-9/29570565_395924327545348_8926702448405232080_n.jpg?_nc_cat=0&oh=74b255affdd3e878da9b988288dd9ce4&oe=5C3A6A80"/>
+                    <div flex layout-padding>
+                        <span class="md-display-1">David Shustin</span>
+                        <br>
+                        <span class="md-headline">ID: 11992</span>
+                    </div>
+                    <div flex layout-padding>
+                        <span class="md-subhead">Grade: 12</span>
+                        <br>
+                        <span class="md-subhead">Priv: Granted</span>
+                    </div>
+                    <div flex layout-padding>
+                        <span ng-class="md-display-1">Kiosk: Sally 1</span>
+                        <br>
+                        <span class="md-display-1">Action: Entering</span>
+                    </div>
+                    <div flex layout-padding>
+                        <span ng-class="md-title">David Shustin</span>
+                        <br>
+                        <span class="md-body-1">11992</span>
+                    </div>
+                    <div flex layout-padding>
+                        <md-icon  style="font-size:64px"> check </md-icon>
+                    </div>
+                </div>
+            </div>
+        </md-content>
+    </md-content>
+</md-content>
+
+<script type="text/javascript" src="node_modules/angular/angular.js"></script>
+<script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>
+<script type="text/javascript" src="node_modules/angular-aria/angular-aria.js"></script>
+<script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>
+<script type="text/javascript" src="node_modules/angular-material-time-picker/dist/md-time-picker.js"></script>
+<script type="text/javascript" src="node_modules/angular-messages/angular-messages.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/controllers/TransactionViewController.js"></script>
+<script type="text/javascript" src="js/controllers/TransactionFeedController.js"></script>
 </body>
 </html>

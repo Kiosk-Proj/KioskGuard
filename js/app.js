@@ -1,1 +1,1 @@
-var app = angular.module('KioskGuard', ['ngMaterial']);
+var app = angular.module('KioskGuard', ['ngMaterial', 'md.time.picker']);
