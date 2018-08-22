@@ -1,0 +1,18 @@
+.container h1 {
+	background-color: skyblue;
+}
+.container h6 {
+	background-color: lightgrey;
+}
+.kioskStudent {
+	display: flex;
+	justify-content: space-around;
+}
+td {
+	text-align: center;
+	background-color: lightblue;
+}
+
+html{
+	font-family: 'Roboto', sans-serif;
+}
