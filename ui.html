@@ -1,0 +1,93 @@
+<!--
+	Creator: Mohandeep Singh Kapur
+	Basic UI look using ANGULARJS for 
+	KIOSK PROJECT
+	Copyrights reserved 2018
+-->
+<!doctype html>
+<hmtl>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+	<script>
+		var app = angular.module('whatever', ['ngMaterial']);
+		app.controller('MainC', ['$scope', function($scope){
+			$scope.title = 'Kiosk User Interface';
+			$scope.studentInfo = {
+				name: 'Mono',
+				id: 1111,
+				grade: 12,
+				priv: 'yes',
+				pubdate:'Thu, 27 April',
+				time: 'THE FUTURE'
+			}
+			//will only display two students at a time. up to you to update the 2 students info on the table continuously.
+			$scope.studentOtherInfo1 = {
+				name: 'Mandeep K',
+				id: 2222,
+				grade: 11,
+				priv:'no',
+				pubdate:'Thu, July 29',
+				time: "THE PAST"
+			}
+			$scope.studentOtherInfo2 = {
+				name: 'William E',
+				id: 3922,
+				grade: 9,
+				priv:'no',
+				pubdate:'Thu, August 29',
+				time: "THE PAST"
+			}
+		}]);
+	</script>
+	<head>
+		<link rel="stylesheet" type="text/css" href="yoyo.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+	</head>
+	<body ng-app="whatever">
+		<div class="main" ng-controller="MainC">
+			<div class="container">
+				<h1>{{title}}<h1>
+				<div class="kioskStudent">
+					<div>
+						<h5><!--png look for--><img src="https://i.ytimg.com/vi/B3VDjhTv0PA/hqdefault.jpg" width = "300" height = "300"></h5>
+					</div>
+					<div>
+						<h6>Name: {{studentInfo.name}}</h6>
+						<h6>ID: {{studentInfo.id}}</h6> 
+						<h6>Grade: {{studentInfo.priv}}</h6>
+						<h6>Privilege: {{studentInfo.priv}}</h6>
+						<h6>Date: <pubDate>{{studentInfo.pubdate}}</pubDate></h6>
+						<h6>Time: {{studentInfo.time}}</h6>
+					</div>
+				</div>
+			</div>
+			<div class = "table">
+				<table style="width:100%">
+  					<tr>
+    					<th>Name</th>
+    					<th>ID</th> 
+    					<th>Privilege</th>
+  					</tr>
+  					<tr>
+    					<td>{{studentOtherInfo1.name}}</td>
+    					<td>{{studentOtherInfo1.id}}</td> 
+    					<td>{{studentOtherInfo1.priv}}</td>
+  					</tr>
+  					<tr>
+    					<td>{{studentOtherInfo2.name}}</td>
+    					<td>{{studentOtherInfo2.id}}</td> 
+    					<td>{{studentOtherInfo2.priv}}</td>
+  					</tr>
+				</table>
+			</div>
+			<!--button just for show, must code it in. create a variable than then increments count+=1 but cannot exceed 2! so studentOtherInfo will fetch new data each time 'called upon', and will keep updating the table + making the button usable. not sure of algo for button to go back. this should be coded-->
+			<div class="click">
+				<p>press for next student</p>
+				<button ng-click="" ng-init="">NEXT</button>
+			</div>
+		</div>
+	</body>
+</hmtl>
