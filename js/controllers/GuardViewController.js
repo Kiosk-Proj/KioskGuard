@@ -1,4 +1,4 @@
-app.controller('GuardViewController', ['$scope', function($scope) {
+app.controller('GuardViewController', ['$scope', '$mdDialog', function($scope, $mdDialog) {
     $scope.activeKiosks = ['Sally1', 'Sally2', 'Joe1', 'Joe2', 'Bob1', 'Bob2'];
     $scope.sallyActive = true;
     $scope.joeActive = true;
@@ -14,8 +14,18 @@ app.controller('GuardViewController', ['$scope', function($scope) {
         if ($scope.bobActive) {
             $scope.activeKiosks.push('Bob1', 'Bob2');
         }
-    }
+    };
     $scope.isWide = function() {
         return $scope.activeKiosks.length <= 3;
+    };
+    $scope.showMoreInfo = function() {
+        $mdDialog.show({
+            templateUrl: '/tmpl/profile.html',
+            controller: 'ProfileController',
+            locals: {
+                id: 11992
+            },
+            fullscreen: true
+        })
     };
 }]);

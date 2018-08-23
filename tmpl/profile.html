@@ -1,0 +1,28 @@
+<md-dialog>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-icon style="margin-right: 8px;">info</md-icon>
+            <h2>David Shustin</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <md-content layout="row">
+                <md-content flex="33">
+                    <img style="width: 100%;" src="https://scontent.fewr1-1.fna.fbcdn.net/v/t1.0-9/29570565_395924327545348_8926702448405232080_n.jpg?_nc_cat=0&oh=74b255affdd3e878da9b988288dd9ce4&oe=5C3A6A80" />
+                </md-content>
+                <md-content flex="66" layout="column" layout-padding>
+                    <h2 class="md-title">Name: David Shustin</h2>
+                    <span class="md-body-1">Student ID: #11992</span>
+                    <span class="md-body-1">Grade: 12</span>
+                    <span class="md-body-1">Privileged: <span md-colors="{'color': 'default-green-600'}">Yes</span></span>
+                </md-content>
+            </md-content>
+            <transaction-log-view></transaction-log-view>
+        </div>
+    </md-dialog-content>
+</md-dialog>

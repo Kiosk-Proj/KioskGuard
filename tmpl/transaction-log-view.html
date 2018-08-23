@@ -1,0 +1,21 @@
+<md-content ng-controller="TransactionFeedController as feedctrl">
+    <!--<span class="md-caption" md-colors="{'color': 'default-grey-700'}" layout-padding>Logs</span>-->
+    <!--<md-divider></md-divider>-->
+    <md-list style="margin: 0">
+        <md-divider ng-repeat-start="transaction in transactions" ng-if="$index !== 0"></md-divider>
+        <md-list-item class="md-2-line" ng-repeat-end>
+            <img class="md-avatar" src="https://scontent.fewr1-1.fna.fbcdn.net/v/t1.0-9/29570565_395924327545348_8926702448405232080_n.jpg?_nc_cat=0&oh=74b255affdd3e878da9b988288dd9ce4&oe=5C3A6A80" />
+            <div class="md-list-item-text">
+                <h3>
+                    David Shustin&nbsp;
+                    <span md-colors="{'color': 'default-grey-600'}">#11992</span>
+                    <!--<md-icon style="font-size: 19px;">check</md-icon>-->
+                </h3>
+                <span class="md-caption">04/03/19 12:02 PM</span>
+            </div>
+            <md-icon class="md-secondary" md-colors="{'color': 'default-green-500'}">check</md-icon>
+            <span class="md-secondary" style="margin-left: 16px;">Entering Sally 1</span>
+            <md-button class="md-secondary md-warn md-raised" style="margin-left: 16px;">Flag</md-button>
+        </md-list-item>
+    </md-list>
+</md-content>
