@@ -46,11 +46,46 @@
     width: auto;
 }
 
+.feed-item.ng-enter {
+    animation: slidedownbig 1s;
+}
+/*.feed-item.ng-move:not(:first-child) {*/
+    /*animation: slidedownsmall 1s;*/
+/*}*/
+/*.feed-item-wide.ng-move:not(:first-child) {*/
+    /*animation: slidedownwide 1s;*/
+/*}*/
+
 @media (max-width: 1600px) {
     .feed-item:not(:first-child) .student-info span.md-title {
         font-size: 0.9em;
     }
     .feed-item:not(:first-child) .student-info span.md-body-1 {
          font-size: 0.8em;
+    }
+}
+
+@keyframes slidedownbig {
+    from {
+        transform: translate(0px, -500px);
+    }
+    to {
+        transform: translate(0px, 0px);
+    }
+}
+@keyframes slidedownsmall {
+    from {
+        transform: translate(0px, -100px);
+    }
+    to {
+        transform: translate(0px, 0px);
+    }
+}
+@keyframes slidedownwide {
+    from {
+        transform: translate(0px, -150px);
+    }
+    to {
+        transform: translate(0px, 0px);
     }
 }

@@ -24,19 +24,21 @@
             <!--<md-divider></md-divider>-->
             <div class="full-height" flex layout-align="start center" layout="column" style="overflow-y: scroll; text-align: left;">
                 {{feedctrl.station = station;""}}
-                <div class="feed-item" ng-repeat="m in activeKiosks" ng-class="{'feed-item-wide': isWide()}" layout="{{isWide() || (!isWide() && $index != 0) ? 'row' : 'column'}}" md-whiteframe="1">
-                    <img src="https://scontent.fewr1-1.fna.fbcdn.net/v/t1.0-9/29570565_395924327545348_8926702448405232080_n.jpg?_nc_cat=0&oh=74b255affdd3e878da9b988288dd9ce4&oe=5C3A6A80"/>
+                <div class="feed-item" ng-repeat="item in feeds[station]" ng-class="{'feed-item-wide': isWide()}" layout="{{isWide() || (!isWide() && $index != 0) ? 'row' : 'column'}}" md-whiteframe="1">
+                    <img ng-src="{{'/avatars/' + item.student.path}}"/>
                     <div class="student-info" flex layout="column">
                         <div flex layout-padding>
-                            <span ng-class="{'md-title': !isWide() && $index != 0, 'md-headline': isWide() || $index == 0}">David Shustin</span>
+                            <span ng-class="{'md-title': !isWide() && $index != 0, 'md-headline': isWide() || $index == 0}">{{item.student.name}}</span>
                             <br>
-                            <span class="md-body-1">11992</span>
+                            <span class="md-body-1">{{item.student.id}}</span>
                         </div>
                         <div layout="row" layout-align="end center">
-                            <md-button class="md-icon-button" ng-click="showMoreInfo(11992)">
+                            <md-button class="md-icon-button" ng-click="showMoreInfo(item.student)">
                                 <md-icon>info</md-icon>
                             </md-button>
-                            <md-button class="md-raised md-warn">Flag</md-button>
+                            <md-button class="md-secondary md-warn md-raised" style="margin-left: 16px;" ng-if="!item.flagLoading && item.log.valid" ng-click="setFlag(item, false)">Flag</md-button>
+                            <md-button class="md-secondary md-raised" style="margin-left: 16px;" ng-if="!item.flagLoading && !item.log.valid" ng-click="setFlag(item, true)">Unflag</md-button>
+                            <md-progress-circular class="md-secondary" style="margin-left: 16px" md-diameter="36px" ng-if="item.flagLoading"></md-progress-circular>
                         </div>
                     </div>
                 </div>
