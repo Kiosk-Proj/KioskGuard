@@ -12,10 +12,12 @@
 <md-content ng-controller="GuardViewController" flex layout="column" class="full-height">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools">
-            <h2 flex md-truncate>GuardView</h2>
+            <h2 md-truncate>GuardView</h2>
+            <span flex></span>
             <md-checkbox ng-change="calculateActiveKiosks()" ng-model="sallyActive">Sally</md-checkbox>&nbsp;&nbsp;
             <md-checkbox ng-change="calculateActiveKiosks()" ng-model="joeActive">Joe</md-checkbox>&nbsp;&nbsp;
             <md-checkbox ng-change="calculateActiveKiosks()" ng-model="bobActive">Bob</md-checkbox>
+            <md-button ng-href="/transactions.html">Switch to TransactionView</md-button>
         </div>
     </md-toolbar>
     <md-content layout="row" flex style="overflow: hidden;">
@@ -24,7 +26,7 @@
             <!--<md-divider></md-divider>-->
             <div class="full-height" flex layout-align="start center" layout="column" style="overflow-y: scroll; text-align: left;">
                 {{feedctrl.station = station;""}}
-                <div class="feed-item" ng-repeat="item in feeds[station]" ng-class="{'feed-item-wide': isWide()}" layout="{{isWide() || (!isWide() && $index != 0) ? 'row' : 'column'}}" md-whiteframe="1">
+                <div class="feed-item" md-colors="{'background-color': item.log.valid ? 'default-grey-50' : 'default-red-500'}" ng-repeat="item in feeds[station] | limitTo : 50" ng-class="{'feed-item-wide': isWide()}" layout="{{isWide() || (!isWide() && $index != 0) ? 'row' : 'column'}}" md-whiteframe="1">
                     <img ng-src="{{'/avatars/' + item.student.path}}"/>
                     <div class="student-info" flex layout="column">
                         <div flex layout-padding>

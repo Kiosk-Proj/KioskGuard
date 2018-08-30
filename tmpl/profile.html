@@ -1,4 +1,4 @@
-<md-dialog>
+<md-dialog layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <md-icon style="margin-right: 8px;">info</md-icon>
@@ -9,8 +9,8 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-dialog-content>
-        <div class="md-dialog-content">
+    <md-dialog-content layout="column">
+        <div class="md-dialog-content" layout="column">
             <md-content layout="row">
                 <md-content flex="33">
                     <img style="width: 100%;" ng-src="{{'/avatars/' + student.path}}" />
@@ -19,12 +19,13 @@
                     <h2 class="md-title">Name: {{student.name}}</h2>
                     <span class="md-body-1">Student ID: #{{student.id}}</span>
                     <span class="md-body-1">Grade: {{student.grade}}</span>
+                    <span class="md-body-1">Status: {{student['in'] ? 'In School' : 'Out Of School'}}</span>
                     <span class="md-body-1">Privileged:
                         <span md-colors="{'color': student.seniorPriv ? 'default-green-600' : 'default-red-600'}">{{student.seniorPriv ? 'Yes' : 'No'}}</span>
                     </span>
                 </md-content>
             </md-content>
-            <transaction-log-view log="log"></transaction-log-view>
+            <transaction-log-view md-force-height="300" style="height: 300px;" flex log="log"></transaction-log-view>
         </div>
     </md-dialog-content>
 </md-dialog>

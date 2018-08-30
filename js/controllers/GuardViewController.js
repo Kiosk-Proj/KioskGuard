@@ -37,9 +37,31 @@ app.controller('GuardViewController', ['$scope', '$mdDialog', '$rootScope', 'Ser
         'Bob2': []
     };
     Server.connectSocket();
+    var then = new Date();
+    then.setTime(then.getTime() - 60*2*1000);
+    console.log(then);
+    Server.getTransactions({
+        start: then.toISOString()
+    }).then(function(transactions) {
+        return $timeout(function() {
+            console.log(transactions);
+            angular.forEach(transactions, function(log) {
+                $scope.feeds[kioskNames[log.log.kiosk]].push(log);
+            });
+        });
+    });
+    var log = [];
+    for (var i = 0; i < 1000; i++) {
+        log.push({student: {"name":"Claire Yan","path":"YanClaire.jpg","grade":"11","id":"12000","seniorPriv":true,"in":false}, log: {"id":12000,"transaction":0,"date":"2018-08-27T21:01:15Z","kiosk":1,"valid":true}});
+    }
+    console.log('len', log.length);
+    $timeout(function() {$scope.feeds['Sally1'] = log;});
     $rootScope.$on('live:message', function(event, data) {
         data = JSON.parse(data);
         console.log(data.log.kiosk);
+        if (!data.log.valid) {
+            new Audio('error.mp3').play();
+        }
         $timeout(function(){$scope.feeds[kioskNames[data.log.kiosk]].unshift(data);});
     });
     $scope.setFlag = function(transaction, valid) { //this is what happens when you use double negatives, javi

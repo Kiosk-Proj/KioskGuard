@@ -4,7 +4,7 @@ app.controller('ProfileController', ['$scope', '$mdDialog', 'Server', 'student',
     console.log(student);
     $scope.log = [];
     Server.getTransactions({
-        student: student.id
+        id: student.id
     }).then(function(transactions) {
         $scope.log = transactions;
         console.log($scope.log);

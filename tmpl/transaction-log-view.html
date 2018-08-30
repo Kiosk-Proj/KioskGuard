@@ -1,23 +1,27 @@
-<md-content ng-controller="TransactionFeedController as feedctrl">
+<md-content class="full-height" ng-controller="TransactionLogController as feedctrl">
     <!--<span class="md-caption" md-colors="{'color': 'default-grey-700'}" layout-padding>Logs</span>-->
     <!--<md-divider></md-divider>-->
-    <md-list style="margin: 0">
-        <md-divider ng-repeat-start="transaction in log|reverse" ng-if="$index !== 0"></md-divider>
-        <md-list-item class="md-2-line" ng-repeat-end>
-            <img class="md-avatar" ng-src="{{'/avatars/' + transaction.student.path}}" />
-            <div class="md-list-item-text">
-                <h3>
-                    {{transaction.student.name}}&nbsp;
-                    <span md-colors="{'color': 'default-grey-600'}">#{{transaction.student.id}}</span>
-                    <!--<md-icon style="font-size: 19px;">check</md-icon>-->
-                </h3>
-                <span class="md-caption">{{transaction.log.date | date:"MMM d, y' &bull; 'h:mm:ss a"}}</span>
-            </div>
-            <md-icon class="md-secondary" md-colors="{'color': 'default-green-500'}">check</md-icon>
-            <span class="md-secondary" style="margin-left: 16px;">Entering {{kioskNames[transaction.log.kiosk]}}</span>
-            <md-button class="md-secondary md-warn md-raised" style="margin-left: 16px;" ng-if="!transaction.flagLoading && transaction.log.valid" ng-click="setFlag(transaction, false)">Flag</md-button>
-            <md-button class="md-secondary md-raised" style="margin-left: 16px;" ng-if="!transaction.flagLoading && !transaction.log.valid" ng-click="setFlag(transaction, true)">Unflag</md-button>
-            <md-progress-circular class="md-secondary" style="margin-left: 16px" md-diameter="36px" ng-if="transaction.flagLoading"></md-progress-circular>
-        </md-list-item>
-    </md-list>
+    <md-virtual-repeat-container class="full-height" style="margin: 0">
+        <!--<md-divider ng-repeat-start="transaction in log|reverse" ng-if="$index !== 0"></md-divider>-->
+        <div md-virtual-repeat="transaction in log|reverse">
+            <md-divider ng-if="false || $index !== 0"></md-divider>
+            <md-list-item class="md-2-line">
+                <img class="md-avatar" ng-src="{{'/avatars/' + transaction.student.path}}" />
+                <div class="md-list-item-text">
+                    <h3>
+                        {{transaction.student.name}}&nbsp;
+                        <span md-colors="{'color': 'default-grey-600'}">#{{transaction.student.id}}</span>
+                        <!--<md-icon style="font-size: 19px;">check</md-icon>-->
+                    </h3>
+                    <span class="md-caption">{{transaction.log.date | date:"MMM d, y' &bull; 'h:mm:ss a"}}</span>
+                </div>
+                <md-button class="md-secondary md-icon-button" ng-click="showMoreInfo(transaction.student)" ng-if="infoEnabled"><md-icon>info</md-icon></md-button>
+                <md-icon class="md-secondary" md-colors="{'color': transaction.log.valid ? 'default-green-500' : 'default-red-500'}" style="margin-left: 16px;">{{transaction.log.valid ? 'check' : 'close'}}</md-icon>
+                <span class="md-secondary" style="margin-left: 16px;">{{kioskNames[transaction.log.kiosk]}}</span>
+                <md-button class="md-secondary md-warn md-raised" style="margin-left: 16px;" ng-if="!transaction.flagLoading && transaction.log.valid" ng-click="setFlag(transaction, false)">Flag</md-button>
+                <md-button class="md-secondary md-raised" style="margin-left: 16px;" ng-if="!transaction.flagLoading && !transaction.log.valid" ng-click="setFlag(transaction, true)">Unflag</md-button>
+                <md-progress-circular class="md-secondary" style="margin-left: 16px" md-diameter="36px" ng-if="transaction.flagLoading"></md-progress-circular>
+            </md-list-item>
+        </div>
+    </md-virtual-repeat-container>
 </md-content>

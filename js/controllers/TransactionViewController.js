@@ -1,6 +1,12 @@
 app.controller('TransactionViewController', ['$scope', '$mdpTimePicker', 'Server', '$timeout', function($scope, $mdpTimePicker, Server, $timeout) {
-    $scope.log = [];
+    var log = [];
+    // for (var i = 0; i < 144000; i++) {
+    //     log.push({student: {"name":"Claire Yan","path":"YanClaire.jpg","grade":"11","id":"12000","seniorPriv":true,"in":false}, log: {"id":12000,"transaction":0,"date":"2018-08-27T21:01:15Z","kiosk":1,"valid":true}});
+    // }
+    // console.log('len', log.length);
+    $scope.log = log;
     Server.getTransactions().then(function(transactions) {
+        console.log('len', transactions.length);
         $timeout(function() {$scope.log = transactions;});
     });
 
@@ -38,7 +44,10 @@ app.controller('TransactionViewController', ['$scope', '$mdpTimePicker', 'Server
             opt.id = filter.id;
         }
         if ('valid' in filter && filter.valid !== null) {
-            opt.valid = filter.valid ? 1 : 0;
+            opt.valid = filter.valid;
+        }
+        if ('violations' in filter) {
+            opt.violations = filter.violations;
         }
         return opt;
     }
@@ -47,5 +56,11 @@ app.controller('TransactionViewController', ['$scope', '$mdpTimePicker', 'Server
         Server.getTransactions(options).then(function(transactions) {
             $timeout(function() {$scope.log = transactions;});
         });
+    };
+    $scope.checkForSubmit = function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            $scope.submit();
+        }
     }
 }]);

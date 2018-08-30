@@ -31,11 +31,15 @@ app.service('Server', ['$rootScope', '$http', '$timeout', '$browser', function($
     };
     this.getTransactions = function(opt) {
         opt = opt || {};
-        var props = ['start', 'end', 'kiosks', 'id', 'name', 'valid'];
-        var data = props.map(function(i) {
-            return i in opt && opt[i] !== null ? [i, opt[i]] : null;
-        }).filter(function(i) {
-            return i !== null;
+        // var props = ['start', 'end', 'kiosks', 'id', 'name', 'valid'];
+        // var data = props.map(function(i) {
+        //     return i in opt && opt[i] !== null ? [i, encodeURIComponent(opt[i])] : null;
+        // }).filter(function(i) {
+        //     return i !== null;
+        // });
+        var data = [];
+        angular.forEach(opt, function(val, param) {
+            if (val !== null) data.push([param, encodeURIComponent(val)]);
         });
         var query = data.map(function(i) {
             return i.join('=');
@@ -52,8 +56,8 @@ app.service('Server', ['$rootScope', '$http', '$timeout', '$browser', function($
             })
         });
     };
-    this.flagTransaction = function(transactionID, flag) {
-        return $http.get(httpurl('/tablet/flag?id=' + transactionID + '&flagged=' + (flag?1:0))).then(dataParser);
+    this.flagTransaction = function(transactionID, valid) {
+        return $http.get(httpurl('/tablet/flag?id=' + transactionID + '&flagged=' + (valid?1:0))).then(dataParser);
     };
     this.getAvatarURL = function(id) {
         return $http.get(httpurl('/img?id=' + id)).then(dataParser).then(function(url) {

@@ -2,7 +2,8 @@ app.directive('transactionLogView', function() {
     return {
         restrict: 'E',
         scope: {
-            log: '='
+            log: '=',
+            infoEnabled: '='
         },
         templateUrl: '/tmpl/transaction-log-view.html'
     }
