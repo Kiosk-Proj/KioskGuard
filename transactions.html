@@ -17,21 +17,52 @@
         </div>
     </md-toolbar>
     <md-content layout="column" flex style="overflow: hidden;" layout-align="center center">
-        <md-content style="width: 90%; margin-top: 16px;" layout-padding layout="column" >
+        <md-content name="filter" style="width: 90%; margin-top: 16px;" layout-padding layout="column" >
             <div layout="row">
-                <md-checkbox>Filter Option 1</md-checkbox>
-                <md-checkbox>Filter Option 2</md-checkbox>
-                <md-checkbox>Filter Option 3</md-checkbox>
+                <md-checkbox ng-model="filter.kiosks[0]">Sally 1</md-checkbox>
+                <md-checkbox ng-model="filter.kiosks[1]">Sally 2</md-checkbox>
+                <md-checkbox ng-model="filter.kiosks[2]">Joe 1</md-checkbox>
+                <md-checkbox ng-model="filter.kiosks[3]">Joe 2</md-checkbox>
+                <md-checkbox ng-model="filter.kiosks[4]">Bob 1</md-checkbox>
+                <md-checkbox ng-model="filter.kiosks[5]">Bob 2</md-checkbox>
             </div>
             <div layout="row">
-                <md-input-container class="">
+                <!--Id, name, start time, end time, valid, comma delimited kiosks-->
+                <md-input-container flex class="">
                     <label>Name</label>
-                    <input>
+                    <input ng-model="filter.name">
                 </md-input-container>
-                <md-input-container class="">
+                <md-input-container flex class="">
                     <label>ID</label>
-                    <input type="number">
+                    <input ng-model="filter.id" type="number">
                 </md-input-container>
+                <md-input-container>
+                    <label>Valid</label>
+                    <md-select ng-model="filter.valid">
+                        <md-option ng-value="null"><em>N/A</em></md-option>
+                        <md-option ng-value="true">Valid</md-option>
+                        <md-option ng-value="false">Invalid</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div layout="column" layout-gt-sm="row">
+                <div layout="column" flex>
+                    <span>Start:</span>
+                    <div layout="row" layout-align="start center">
+                        <md-datepicker ng-model="filter.start.date"></md-datepicker>
+                        <md-time-picker ng-model="filter.start.time"></md-time-picker>
+                    </div>
+                </div>
+                <div layout="column" flex>
+                    <span>End:</span>
+                    <div layout="row" layout-align="start center">
+                        <md-datepicker ng-model="filter.end.date"></md-datepicker>
+                        <md-time-picker ng-model="filter.end.time"></md-time-picker>
+                    </div>
+                </div>
+            </div>
+            <div layout="row" layout-align="end end">
+                <md-button ng-click="submit()">Submit Filter</md-button>
             </div>
         </md-content>
         <transaction-log-view log="log" style="display: block; width: 90%; margin: 16px;" md-whiteframe="3"></transaction-log-view>

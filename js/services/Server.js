@@ -31,15 +31,16 @@ app.service('Server', ['$rootScope', '$http', '$timeout', '$browser', function($
     };
     this.getTransactions = function(opt) {
         opt = opt || {};
-        var props = ['start', 'end', 'kiosk', 'student'];
+        var props = ['start', 'end', 'kiosks', 'id', 'name', 'valid'];
         var data = props.map(function(i) {
-            return i in opt ? [i, opt[i]] : null;
+            return i in opt && opt[i] !== null ? [i, opt[i]] : null;
         }).filter(function(i) {
             return i !== null;
         });
         var query = data.map(function(i) {
             return i.join('=');
         }).join('&');
+        console.log(httpurl('/transactions' + (query.length !== 0 ? '?' : '') + query));
         return $http.get(httpurl('/transactions' + (query.length !== 0 ? '?' : '') + query)).then(dataParser).then(function(data) {
             return studentCacheMap.then(function(students) {
                 return data.map(function(i) {

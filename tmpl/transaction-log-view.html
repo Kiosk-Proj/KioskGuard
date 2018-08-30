@@ -11,7 +11,7 @@
                     <span md-colors="{'color': 'default-grey-600'}">#{{transaction.student.id}}</span>
                     <!--<md-icon style="font-size: 19px;">check</md-icon>-->
                 </h3>
-                <span class="md-caption">{{transaction.log.date | date:"MMM d, y' &bull; 'h:mm a"}}</span>
+                <span class="md-caption">{{transaction.log.date | date:"MMM d, y' &bull; 'h:mm:ss a"}}</span>
             </div>
             <md-icon class="md-secondary" md-colors="{'color': 'default-green-500'}">check</md-icon>
             <span class="md-secondary" style="margin-left: 16px;">Entering {{kioskNames[transaction.log.kiosk]}}</span>
