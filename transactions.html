@@ -32,13 +32,13 @@
             </div>
             <div layout="row">
                 <!--Id, name, start time, end time, valid, comma delimited kiosks-->
+                <!--<md-input-container flex class="">-->
+                    <!--<label>Name</label>-->
+                    <!--<input ng-keypress="checkForSubmit($event)" ng-model="filter.name">-->
+                <!--</md-input-container>-->
                 <md-input-container flex class="">
-                    <label>Name</label>
-                    <input ng-keypress="checkForSubmit($event)" ng-model="filter.name">
-                </md-input-container>
-                <md-input-container flex class="">
-                    <label>ID</label>
-                    <input ng-keypress="checkForSubmit($event)" ng-model="filter.id" type="number">
+                    <label>Name/ID</label>
+                    <input ng-keypress="checkForSubmit($event)" ng-model="filter.id">
                 </md-input-container>
                 <md-input-container>
                     <label>Valid</label>
