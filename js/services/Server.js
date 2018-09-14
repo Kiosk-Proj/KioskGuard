@@ -38,7 +38,7 @@ app.service('Server', ['$rootScope', '$http', '$timeout', '$browser', function($
         //     return i !== null;
         // });
         var data = [];
-        if (!('name' in opt) && !opt.id.match(/\d+/)) {
+        if (!('name' in opt) && ('id' in opt && !opt.id.match(/\d+/))) {
             opt.name = opt.id;
             opt.id = null;
         }
