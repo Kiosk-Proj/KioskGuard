@@ -8,7 +8,7 @@ app.service('Server', ['$rootScope', '$http', '$timeout', '$browser', function($
     };
     function url(endpoint, protocol) {
         if (endpoint[0] === '/') endpoint = endpoint.substring(1);
-        return protocol + '://96.225.21.203:55622/' + endpoint;
+        return protocol + '://IP_HERE:55622/' + endpoint;
     }
 
     function httpurl(endpoint) {

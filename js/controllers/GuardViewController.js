@@ -50,12 +50,12 @@ app.controller('GuardViewController', ['$scope', '$mdDialog', '$rootScope', 'Ser
             });
         });
     });
-    var log = [];
-    for (var i = 0; i < 1000; i++) {
-        log.push({student: {"name":"Claire Yan","path":"YanClaire.jpg","grade":"11","id":"12000","seniorPriv":true,"in":false}, log: {"id":12000,"transaction":0,"date":"2018-08-27T21:01:15Z","kiosk":1,"valid":true}});
-    }
-    console.log('len', log.length);
-    $timeout(function() {$scope.feeds['Sally1'] = log;});
+    // var log = [];
+    // for (var i = 0; i < 1000; i++) {
+    //     log.push({student: {"name":"Claire Yan","path":"YanClaire.jpg","grade":"11","id":"12000","seniorPriv":true,"in":false}, log: {"id":12000,"transaction":0,"date":"2018-08-27T21:01:15Z","kiosk":1,"valid":true}});
+    // }
+    // console.log('len', log.length);
+    // $timeout(function() {$scope.feeds['Sally1'] = log;});
     $rootScope.$on('live:message', function(event, data) {
         data = JSON.parse(data);
         console.log(data.log.kiosk);
