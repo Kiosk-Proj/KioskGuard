@@ -1,0 +1,53 @@
+<md-content ng-controller="TransactionViewController" class="full-height" layout="column" flex style="overflow: hidden;" layout-align="start center">
+    <md-content style="width: 90%; margin-top: 16px;" layout-padding layout="column" >
+        <div layout="row">
+            <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[0]">Sally 1</md-checkbox>
+            <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[1]">Sally 2</md-checkbox>
+            <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[2]">Joe 1</md-checkbox>
+            <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[3]">Joe 2</md-checkbox>
+            <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[4]">Bob 1</md-checkbox>
+            <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[5]">Bob 2</md-checkbox>
+            <span flex></span>
+            <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.violations">Violations Only</md-checkbox>
+        </div>
+        <div layout="row">
+            <!--Id, name, start time, end time, valid, comma delimited kiosks-->
+            <!--<md-input-container flex class="">-->
+            <!--<label>Name</label>-->
+            <!--<input ng-keypress="checkForSubmit($event)" ng-model="filter.name">-->
+            <!--</md-input-container>-->
+            <md-input-container flex class="">
+                <label>Name/ID</label>
+                <input ng-keypress="checkForSubmit($event)" ng-model="filter.id">
+            </md-input-container>
+            <md-input-container>
+                <label>Valid</label>
+                <md-select ng-keypress="checkForSubmit($event)" ng-model="filter.valid">
+                    <md-option ng-value="null"><em>N/A</em></md-option>
+                    <md-option ng-value="true">Valid</md-option>
+                    <md-option ng-value="false">Invalid</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout="column" layout-gt-sm="row">
+            <div layout="column" flex>
+                <span>Start:</span>
+                <div layout="row" layout-align="start center">
+                    <md-datepicker ng-keypress="checkForSubmit($event)" ng-model="filter.start.date"></md-datepicker>
+                    <md-time-picker ng-keypress="checkForSubmit($event)" ng-model="filter.start.time"></md-time-picker>
+                </div>
+            </div>
+            <div layout="column" flex>
+                <span>End:</span>
+                <div layout="row" layout-align="start center">
+                    <md-datepicker ng-keypress="checkForSubmit($event)" ng-model="filter.end.date"></md-datepicker>
+                    <md-time-picker ng-keypress="checkForSubmit($event)" ng-model="filter.end.time"></md-time-picker>
+                </div>
+            </div>
+        </div>
+        <div layout="row" layout-align="end end">
+            <md-button ng-click="submit()">Submit Filter</md-button>
+        </div>
+    </md-content>
+    <transaction-log-view flex log="log" info-enabled="true" style="width: 90%; margin: 16px;" md-whiteframe="2"></transaction-log-view>
+</md-content>

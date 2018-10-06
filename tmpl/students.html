@@ -1,0 +1,56 @@
+<md-content ng-controller="StudentViewController" class="full-height" layout="column" flex style="overflow: hidden;" layout-align="start center">
+    <md-content style="width: 90%; margin-top: 16px;" layout-padding layout="column" >
+        <div layout="row">
+            <!--Id, name, start time, end time, valid, comma delimited kiosks-->
+            <!--<md-input-container flex class="">-->
+            <!--<label>Name</label>-->
+            <!--<input ng-keypress="checkForSubmit($event)" ng-model="filter.name">-->
+            <!--</md-input-container>-->
+            <md-input-container flex class="">
+                <label>Name/ID</label>
+                <input ng-keypress="checkForSubmit($event)" ng-model="filter.id">
+            </md-input-container>
+            <md-input-container>
+                <label>Grade</label>
+                <input ng-keypress="checkForSubmit($event)" ng-model="filter.grade">
+            </md-input-container>
+            <md-input-container>
+                <label>Out of School</label>
+                <md-select ng-keypress="checkForSubmit($event)" ng-model="filter.out">
+                    <md-option ng-value="null"><em>N/A</em></md-option>
+                    <md-option ng-value="true"><md-icon md-colors="{color: 'default-green-500'}">check</md-icon></md-option>
+                    <md-option ng-value="false"><md-icon md-colors="{color: 'default-red-500'}">close</md-icon></md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>Privilege</label>
+                <md-select ng-keypress="checkForSubmit($event)" ng-model="filter.privilege">
+                    <md-option ng-value="null"><em>N/A</em></md-option>
+                    <md-option ng-value="true"><md-icon md-colors="{color: 'default-green-500'}">check</md-icon></md-option>
+                    <md-option ng-value="false"><md-icon md-colors="{color: 'default-red-500'}">close</md-icon></md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout="row" layout-align="end end">
+            <md-button ng-click="submit()">Submit Filter</md-button>
+        </div>
+    </md-content>
+    <md-content flex style="width: 90%; margin: 16px;" md-whiteframe="2">
+        <md-virtual-repeat-container class="full-height" style="margin: 0;">
+            <div md-virtual-repeat="student in students">
+                <md-list-item class="md-2-line">
+                    <img class="md-avatar" ng-src="{{'/avatars/' + student.path}}" />
+                    <div class="md-list-item-text">
+                        <h3>
+                            {{student.name}}&nbsp;
+                            <span md-colors="{'color': 'default-grey-600'}">#{{student.id}}</span>
+                            <!--<md-icon style="font-size: 19px;">check</md-icon>-->
+                        </h3>
+                    </div>
+                    <md-button class="md-secondary md-icon-button" ng-click="showMoreInfo(student)"><md-icon>info</md-icon></md-button>
+                </md-list-item>
+                <md-divider></md-divider>
+            </div>
+        </md-virtual-repeat-container>
+    </md-content>
+</md-content>

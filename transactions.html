@@ -10,7 +10,7 @@
     <link href="css/transactions.css" rel="stylesheet" />
 </head>
 <body>
-<md-content class="full-height" ng-controller="TransactionViewController" flex layout="column" class="">
+<md-content class="full-height" ng-controller="RecordViewController" flex layout="column" class="">
     <md-toolbar class="md-hue-2">
         <div class="md-toolbar-tools">
             <h2 md-truncate>TransactionView</h2>
@@ -18,59 +18,15 @@
             <md-button ng-href="/">Switch to GuardView</md-button>
         </div>
     </md-toolbar>
-    <md-content layout="column" flex style="overflow: hidden;" layout-align="start center">
-        <md-content style="width: 90%; margin-top: 16px;" layout-padding layout="column" >
-            <div layout="row">
-                <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[0]">Sally 1</md-checkbox>
-                <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[1]">Sally 2</md-checkbox>
-                <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[2]">Joe 1</md-checkbox>
-                <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[3]">Joe 2</md-checkbox>
-                <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[4]">Bob 1</md-checkbox>
-                <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.kiosks[5]">Bob 2</md-checkbox>
-                <span flex></span>
-                <md-checkbox ng-keypress="checkForSubmit($event)" ng-model="filter.violations">Violations Only</md-checkbox>
-            </div>
-            <div layout="row">
-                <!--Id, name, start time, end time, valid, comma delimited kiosks-->
-                <!--<md-input-container flex class="">-->
-                    <!--<label>Name</label>-->
-                    <!--<input ng-keypress="checkForSubmit($event)" ng-model="filter.name">-->
-                <!--</md-input-container>-->
-                <md-input-container flex class="">
-                    <label>Name/ID</label>
-                    <input ng-keypress="checkForSubmit($event)" ng-model="filter.id">
-                </md-input-container>
-                <md-input-container>
-                    <label>Valid</label>
-                    <md-select ng-keypress="checkForSubmit($event)" ng-model="filter.valid">
-                        <md-option ng-value="null"><em>N/A</em></md-option>
-                        <md-option ng-value="true">Valid</md-option>
-                        <md-option ng-value="false">Invalid</md-option>
-                    </md-select>
-                </md-input-container>
-            </div>
-            <div layout="column" layout-gt-sm="row">
-                <div layout="column" flex>
-                    <span>Start:</span>
-                    <div layout="row" layout-align="start center">
-                        <md-datepicker ng-keypress="checkForSubmit($event)" ng-model="filter.start.date"></md-datepicker>
-                        <md-time-picker ng-keypress="checkForSubmit($event)" ng-model="filter.start.time"></md-time-picker>
-                    </div>
-                </div>
-                <div layout="column" flex>
-                    <span>End:</span>
-                    <div layout="row" layout-align="start center">
-                        <md-datepicker ng-keypress="checkForSubmit($event)" ng-model="filter.end.date"></md-datepicker>
-                        <md-time-picker ng-keypress="checkForSubmit($event)" ng-model="filter.end.time"></md-time-picker>
-                    </div>
-                </div>
-            </div>
-            <div layout="row" layout-align="end end">
-                <md-button ng-click="submit()">Submit Filter</md-button>
-            </div>
-        </md-content>
-        <transaction-log-view flex log="log" info-enabled="true" style="width: 90%; margin: 16px;" md-whiteframe="2"></transaction-log-view>
-    </md-content>
+    <md-nav-bar
+        md-selected-nav-item="currentPage.name"
+        layout="row"
+        layout-align="center center">
+        <md-nav-item name="transactions" md-nav-click="currentPage.url = 'tmpl/transactions.html';">Transactions</md-nav-item>
+        <md-nav-item name="students" md-nav-click="currentPage.url = 'tmpl/students.html';">Students</md-nav-item>
+    </md-nav-bar>
+    <div flex style="height: 100%;" ng-include="currentPage.url">
+    </div>
 </md-content>
 
 <script type="text/javascript" src="node_modules/angular/angular.js"></script>
@@ -80,10 +36,12 @@
 <script type="text/javascript" src="node_modules/angular-material-time-picker/dist/md-time-picker.js"></script>
 <script type="text/javascript" src="node_modules/angular-messages/angular-messages.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/controllers/TransactionViewController.js"></script>
-<script type="text/javascript" src="js/controllers/TransactionLogController.js"></script>
+<script type="text/javascript" src="/js/controllers/TransactionViewController.js"></script>
+<script type="text/javascript" src="/js/directives/transactionLogView.js"></script>
 <script type="text/javascript" src="js/controllers/ProfileController.js"></script>
-<script type="text/javascript" src="js/directives/transactionLogView.js"></script>
+<script type="text/javascript" src="/js/controllers/TransactionLogController.js"></script>
+<script type="text/javascript" src="js/controllers/RecordViewController.js"></script>
+<script type="text/javascript" src="js/controllers/StudentViewController.js"></script>
 <script type="text/javascript" src="js/services/Server.js"></script>
 </body>
 </html>
