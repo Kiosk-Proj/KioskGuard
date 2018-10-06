@@ -3,7 +3,23 @@ app.controller('StudentViewController', ['$scope', 'Server', '$timeout', '$mdDia
     $scope.students = students;
     Server.listStudents().then(function(retrievedStudents) {
         $timeout(function() {
-            students = retrievedStudents;
+            students = retrievedStudents.sort(function(aobj,bobj) {
+                var a = aobj.name;
+                var b = bobj.name;
+                // console.log(a);
+                // Sorts first based on last name, then by first name, then all others
+                if (a.toLowerCase() == b.toLowerCase()) return 0;
+                var namePriorityA = a.toLowerCase().split(' ').reverse(), namePriorityB = b.toLowerCase().split(' ').reverse();
+                var firstA = namePriorityA.pop(), firstB = namePriorityB.pop();
+                namePriorityA.splice(1, 0, firstA);
+                namePriorityB.splice(1, 0, firstB);
+                var minlen = Math.min(namePriorityA.length, namePriorityB.length);
+                for (var i = 0; i < minlen; i++) {
+                    if (namePriorityA[i] == namePriorityB[i]) continue;
+                    return namePriorityA[i].localeCompare(namePriorityB[i]);
+                }
+                return namePriorityA.length < namePriorityB.length ? -1 : 1;
+            });
             $scope.students = retrievedStudents;
         });
     });
