@@ -57,6 +57,24 @@ app.controller('TransactionViewController', ['$scope', '$mdpTimePicker', 'Server
             $timeout(function() {$scope.log = transactions;});
         });
     };
+
+    $scope.download = function(data) {
+        var key = ['NAME', 'ID', 'TIME', 'VALID', 'KIOSK'];
+        var rows = [];
+        rows.push(key.join(','));
+        for (let i = 0; i < data.length; i++) {
+            var log = data[i];
+            var entry = [log.student.name, log.student.id, log.log.date.toISOString(), log.log.valid, kioskNames[log.log.kiosk]];
+            rows.push(entry.join(','));
+        }
+        var csv = encodeURIComponent(rows.join('\n'));
+        var link = document.createElement('a');
+        link.href = 'data:text/csv,' + csv;
+        link.style.visibility = 'hidden';
+        document.querySelector('body').appendChild(link);
+        link.click();
+    };
+
     $scope.checkForSubmit = function(event) {
         if (event.keyCode === 13) {
             event.preventDefault();
